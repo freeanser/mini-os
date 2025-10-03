@@ -48,6 +48,10 @@ void FileSystem::renameFile(const std::string& oldName, const std::string& newNa
 }
 
 void FileSystem::listDirectory(const std::string& path) {
+    std::cout << "Directory listing for: " << fs::absolute(path) << "\n";
+    for (const auto& entry : fs::directory_iterator(path)) {
+        std::cout << "  " << entry.path().filename().string() << "\n";
+    }
 }
 
 void FileSystem::moveFile(const std::string& src, const std::string& dst) {
