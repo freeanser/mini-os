@@ -26,6 +26,5 @@ int main() {
     fs.moveFile("renamed.txt", "newdir/renamed.txt");
 
     
-
     return 0;
 }
