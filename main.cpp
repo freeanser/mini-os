@@ -1,25 +1,26 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <filesystem>  
-#include <cstdio>
 #include "Process.h"
-using namespace std;
+#include "FileSystem.h"
 
 int main() {
-    cout << "Hello, mini-OS project is running!\n";
-    
-    // Demo: Process Scheduling
-    vector<Process> ps = {
+    std::cout << "Hello, OOP mini-OS is running!" << std::endl;
+
+    // Process scheduling demo
+    std::vector<Process> ps = {
         {"Process A", 2},
         {"Process B", 1},
         {"Process C", 3}
     };
-    // Process:: means “this function belongs to the Process class.”
     Process::sortProcesses(ps);
     Process::printProcesses(ps);
+
+    // File system demo
+    FileSystem fs;
+    fs.createFile("demo.txt", "Hello from OOP!");
+    fs.readFile("demo.txt");
+    fs.renameFile("demo.txt", "renamed.txt");
+    fs.listDirectory(".");
+    fs.moveFile("renamed.txt", "out/renamed.txt");
 
     return 0;
 }
