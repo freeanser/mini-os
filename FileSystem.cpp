@@ -30,6 +30,12 @@ void FileSystem::readFile(const std::string& fileName) {
 }
 
 void FileSystem::deleteFile(const std::string& fileName) {
+    int result = std::remove(fileName.c_str());
+    if ( result == 0) {
+        std::cout << "Deleted file: " << fileName << "\n";
+    } else {
+        perror("Delete failed");
+    }
 }
 
 void FileSystem::renameFile(const std::string& oldName, const std::string& newName) {
