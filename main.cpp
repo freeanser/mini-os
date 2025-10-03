@@ -16,7 +16,7 @@ int main() {
 
     // File system demo
     FileSystem fs;
-    fs.createFile("demo.txt", "Hello from OOP!");
+    fs.createFile("demo.txt", "Hello from OS!");
     fs.readFile("demo.txt");
     fs.renameFile("demo.txt", "renamed.txt");
     fs.listDirectory(".");

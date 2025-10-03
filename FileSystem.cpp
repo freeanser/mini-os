@@ -7,17 +7,26 @@
 namespace fs = std::filesystem;
 
 void FileSystem::createFile(const std::string& fileName, const std::string& content) {
-    std::ofstream out(fileName);
-    if (!out) {
+    std::ofstream newFile(fileName);
+    if (!newFile) {
         std::cerr << "Cannot create file: " << fileName << "\n";
         return;
     }
-    out << content << "\n";
+    newFile << content << "\n";
     std::cout << "Created file: " << fileName << "\n";
 
 }
 
+
 void FileSystem::readFile(const std::string& fileName) {
+    std::ifstream in(fileName);
+    if (!in) {
+        std::cerr << "Cannot read file: " << fileName << "\n";
+        return;
+    }
+    std::string line;
+    std::getline(in, line);
+    std::cout << "File content: " << line << "\n";
 }
 
 void FileSystem::deleteFile(const std::string& fileName) {
