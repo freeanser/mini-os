@@ -18,12 +18,12 @@ int main() {
     FileSystem fs;
     fs.createFile("demo.txt", "Hello from OS!");
     fs.readFile("demo.txt");
+    fs.deleteFile("demo.txt");
 
-    // fs.deleteFile("demo.txt");
-
-    // fs.renameFile("demo.txt", "renamed.txt");
+    fs.createFile("demo.txt", "Hello from OS!");
+    fs.renameFile("demo.txt", "renamed.txt");
     fs.listDirectory(".");
-    fs.moveFile("renamed.txt", "out/renamed.txt");
+    fs.moveFile("renamed.txt", "newdir/renamed.txt");
 
     
 
