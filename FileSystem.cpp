@@ -57,6 +57,10 @@ void FileSystem::listDirectory(const std::string& path) {
 void FileSystem::moveFile(const std::string& src, const std::string& dst) {
     try {
         fs::create_directories(fs::path(dst).parent_path());
+
+        // When you call `std::rename`:
+        // * The file’s data blocks on disk don’t move.
+        // * The system only updates the pointer (directory entry → inode) from the old path to the new one.
         if (std::rename(src.c_str(), dst.c_str()) == 0) {
             std::cout << "Moved: " << src << " -> " << dst << "\n";
         } else {
