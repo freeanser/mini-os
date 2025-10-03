@@ -16,12 +16,12 @@ int main() {
 
     // File system demo
     FileSystem fs;
-    fs.createFile("demo.txt", "Hello from OS!");
-    fs.readFile("demo.txt");
+    // fs.createFile("demo.txt", "Hello from OS!");
+    // fs.readFile("demo.txt");
 
     // fs.deleteFile("demo.txt");
 
-    fs.renameFile("demo.txt", "renamed.txt");
+    // fs.renameFile("demo.txt", "renamed.txt");
     fs.listDirectory(".");
     fs.moveFile("renamed.txt", "out/renamed.txt");
 

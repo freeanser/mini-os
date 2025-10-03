@@ -39,6 +39,12 @@ void FileSystem::deleteFile(const std::string& fileName) {
 }
 
 void FileSystem::renameFile(const std::string& oldName, const std::string& newName) {
+    int result = std::rename(oldName.c_str(), newName.c_str());
+    if (result == 0) {
+        std::cout << "Renamed: " << oldName << " -> " << newName << "\n";
+    } else {
+        perror("Rename failed");
+    }
 }
 
 void FileSystem::listDirectory(const std::string& path) {
