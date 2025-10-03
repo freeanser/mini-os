@@ -1,7 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 TARGET = mini_os
-SRC = main.cpp
+# SRC = main.cpp
+SRC = $(wildcard *.cpp)
 
 all: $(TARGET)
 
