@@ -1,54 +1,50 @@
 # Operational Simulation of a Simple Operating System
 
 ## Objective
-This C++ project simulates fundamental aspects of an operating system by emulating process scheduling and basic file system operations. The purpose of this report is to explain the objective, implemented functions, code composition, and overall significance of the program.
+This C++17 project simulates fundamental aspects of an operating system by emulating **Process Management** (Priority Scheduling) and **File System Management**. The project utilizes Object-Oriented Programming (OOP) principles and `std::filesystem` to demonstrate how an OS coordinates tasks and manages storage resources safely.
 
-## Purpose
-The goal is to show how operating systems handle two key areas:
-- **Process Management**: scheduling tasks based on priority.
-- **File Management**: creating, reading, deleting, renaming, moving, and listing files.
+## Purpose of the Operating System
+The primary purpose of this simulation is to demonstrate:
+1.  **Resource Abstraction**: Hiding complex hardware operations (like disk I/O) behind simple APIs.
+2.  **Task Scheduling**: Managing CPU execution order based on process priority to ensure critical tasks run first.
+3.  **System Stability**: Implementing robust error handling (`try-catch` blocks) to ensure the system remains operational even when runtime errors occur (e.g., missing files or permission issues).
 
-## Why Operating Systems Need Process Scheduling
-An operating system needs scheduling because many processes want to use the CPU at the same time, but the CPU can only run one process at a given moment. Scheduling decides the order of execution, so the system stays efficient and fair.
+## Implemented Functions
 
-## Functions
+### 1. Process Management (Module: `Process`)
+Simulates a CPU scheduler that decides execution order based on priority.
+-   **Structure**: A `Process` class encapsulates a process's `name` and `priority`.
+-   **Scheduling Algorithm**: 
+    -   `Process::sortProcesses()`: Implements a priority-based sorting algorithm (Ascending order: Lower numeric value = Higher priority logic, or simply sorted by priority level).
+-   **Execution Tracking**:
+    -   `Process::printProcesses()`: Displays the queue of processes in the order they will be executed.
 
-1. **Process Management**
-   - **Class Process**: Represents a process with a name and priority.
-   - **sortProcesses()**: Sorts processes by priority, simulating task scheduling.
-   - **printProcesses()**: Prints scheduled processes in execution order.
+### 2. File System Management (Module: `FileSystem`)
+Simulates disk operations using the modern C++17 `<filesystem>` library. All operations are wrapped in **error handling blocks** to prevent system crashes.
+-   **File Creation**: `createFile()` establishes new file streams and writes initial content.
+-   **File Reading**: `readFile()` opens input streams to retrieve data, verifying file existence.
+-   **File Deletion**: `deleteFile()` interfaces with `std::remove` to delete files.
+-   **File Renaming**: `renameFile()` changes file identifiers using `std::rename`.
+-   **Directory Listing**: `listDirectory()` utilizes `directory_iterator` to enumerate files in a path.
+-   **File Moving**: `moveFile()` combines directory creation (`create_directories`) and renaming logic to simulate moving files across paths.
 
-2. **File Management**
-   - **createFile()**: Creates a new file and writes content into it.
-   - **readFile()**: Reads and prints content from a file.
-   - **deleteFile()**: Deletes a specified file.
-   - **renameFile()**: Renames an existing file, mimicking OS file organization.
-   - **listDirectory()**: Lists files in a given directory, simulating directory listing.
-   - **moveFile()**: Moves a file from one location to another, implemented with `std::rename`.
+### 3. Error Handling & Robustness (New Feature)
+-   **Exception Safety**: Critical I/O operations in `FileSystem.cpp` and the main execution loop in `main.cpp` are protected by `try-catch` blocks.
+-   **Failure Recovery**: The system catches specific exceptions (e.g., `fs::filesystem_error`, `std::exception`) and prints descriptive error messages instead of terminating unexpectedly.
 
-3. **System Calls and Abstraction**
-   - The `main.cpp` program acts as the entry point, demonstrating calls to process scheduling and file system functions.  
-   - These calls illustrate how system calls provide a high-level abstraction for interacting with OS resources.
+## Code Composition & Lines of Code (LOC)
+The project is modularized into header files (`.h`) for declarations and source files (`.cpp`) for implementations. 
 
-## Code Composition
+**Total Lines of Code: ~295 lines**
 
-The project follows an **Object-Oriented Programming (OOP)** structure and is written in about **200 lines of code**, organized as:
-
-- `main.cpp`: Program entry, demonstrates features.  
-- `Process.h / Process.cpp`: Defines and implements process management functions.  
-- `FileSystem.h / FileSystem.cpp`: Defines and implements file operations using `<filesystem>`.  
-- `Makefile`: Automates compilation and execution with g++.
-The code is compiled with **C++17** and requires only a standard compiler (e.g., g++).
-
-## Lines of Code
-Current version (approximate, excluding blank lines):  
-- `main.cpp` — 30 lines  
-- `Process.h` — 29 lines  
-- `Process.cpp` — 30 lines  
-- `FileSystem.h` — 16 lines  
-- `FileSystem.cpp` — 72 lines  
-- `Makefile` — 16 lines  
-**Total: 193 lines** 
+| File | Approx. Lines | Description |
+| :--- | :--- | :--- |
+| `main.cpp` | 52 | Entry point; global error catching & demos features. |
+| `FileSystem.cpp` | 152 | Implements file operations with robust `try-catch`. |
+| `Process.cpp` | 30 | Implements sorting and printing logic. |
+| `Process.h` | 29 | Class definition for Process. |
+| `FileSystem.h` | 16 | Class definition for FileSystem. |
+| `Makefile` | 16 | Build script for compilation. |
 
 ## Conclusion
-This project provides a simplified but effective simulation of basic operating system concepts. By scheduling processes and performing file operations, the program highlights how an OS coordinates tasks and manages storage. While not a real OS, it offers valuable educational insights into the abstractions and functionality of actual systems. The modular design, process encapsulation, and file system APIs reflect how operating systems manage complexity while exposing a simple interface to users.
+This project successfully models the "Manager" role of an operating system. By integrating priority scheduling with a robust, exception-safe file system, the simulation demonstrates how actual operating systems maintain stability and order while serving user requests.
