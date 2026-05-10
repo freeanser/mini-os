@@ -6,9 +6,7 @@
 #include <exception>
 
 using namespace std;
-
 namespace fs = filesystem;
-
 void FileSystem::createFile(const string &fileName, const string &content)
 {
     try
