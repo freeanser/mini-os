@@ -13,7 +13,6 @@ void FileSystem::createFile(const string &fileName, const string &content)
     {
         ofstream newFile(fileName);
         // newFile.exceptions(ofstream::failbit | ofstream::badbit);
-
         if (!newFile)
         {
             cerr << "Cannot create file (Stream error): " << fileName << "\n";
