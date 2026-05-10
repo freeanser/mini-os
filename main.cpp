@@ -4,14 +4,16 @@
 #include "Process.h"
 #include "FileSystem.h"
 
+using namespace std;
+
 int main()
 {
     try
     {
-        std::cout << "Hello, OOP mini-OS is running!" << std::endl;
+        cout << "Hello, OOP mini-OS is running!" << endl;
 
         // Process scheduling demo
-        std::vector<Process> ps = {
+        vector<Process> ps = {
             {"Process A", 2},
             {"Process B", 1},
             {"Process C", 3}};
@@ -37,14 +39,14 @@ int main()
         // test moving file
         fs.moveFile("renamed.txt", "newdir/renamed.txt");
     }
-    catch (const std::exception &e)
+    catch (const exception &e)
     {
-        std::cerr << "CRITICAL ERROR: Uncaught exception in main: " << e.what() << "\n";
+        cerr << "CRITICAL ERROR: Uncaught exception in main: " << e.what() << "\n";
         return 1;
     }
     catch (...)
     {
-        std::cerr << "CRITICAL ERROR: Unknown exception occurred in main.\n";
+        cerr << "CRITICAL ERROR: Unknown exception occurred in main.\n";
         return 1;
     }
 
